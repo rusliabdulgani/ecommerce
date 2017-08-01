@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>ecommerce</title>
+      <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+      <!-- Optional theme -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+      <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+      <!-- Latest compiled and minified JavaScript -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+      <link href="https://fonts.googleapis.com/css?family=Bellefair|Source+Sans+Pro" rel="stylesheet">
+      <link rel="stylesheet" href="public/style/style.css">
+      <script src="https://unpkg.com/vue"></script>
+      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div class="container top">
+      <div class="row">
+        <div class="col-xs-12 col-md-2">
+          <a href="#">
+          <img src="/public/img/headphones-png-20177.png" height="70" width="70" alt="">
+          <h4>Shophonia</h4>
+          </a>
+        </div>
+        <div class="col-xs-12 col-md-5">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Cari headphone/earphone...">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">Cari</button>
+            </span>
+          </div><!-- /input-group -->
+        </div>
+        <div class="col-xs-12 col-md-2">
+          <img src="https://camo.githubusercontent.com/b0aa467946f9d5650e9c540bed85bfa4648aa315/68747470733a2f2f63646e332e69636f6e66696e6465722e636f6d2f646174612f69636f6e732f636c6f746865732d70726f64756374732f3531322f4261675f412d3531322e706e67" height="35" width="35" alt="">
+        </div>
+        <div class="col-xs-12 col-md-3">
+          <div class="button-group">
+            <button type="button" class="btn btn-default">Sign In</button>
+            <button type="button" class="btn btn-default">Sign Up</button>
+          </div>
+        </div>
+      </div>
+        <div class="row">
+        <div class="col-md-12">
+          <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#">Headphones</a></li>
+              <li><a href="#">Earphones</a></li>
+              <li><a href="#">DAP(Digital Audio Player)</a></li>
+              <li><a href="#">DAC(Digital to Analog Converter)</a></li>
+            </ul>
+          </div>
+        </nav>
+        </div>
+        </div>
+    </div>
+    <div class="container" id="app">
+      <div class="row">
+        <div v-for="audio in results.data" class="col-md-3">
+          
+          <div class="thumbnail" >
+            <img v-bind:src="audio.image" alt="...">
+            <div class="caption">
+              <h3>{{audio.name}}</h3>
+              <p>Rp. {{audio.price}}</p>
+              <button type="button" data-toggle="modal" data-target="#myModal" v-on:click="fetchById(audio._id)">detail</button>
+                            <!-- Modal -->
+              <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title"><center>{{detail.name}}</center></h4>
+                    </div>
+                    <div class=" modal-body">
+                      <img v-bind:src="detail.image" alt="">
+                    </div>
+                    <div class="col-md-6">
+                      <table class="table table-condensed">
+                        <tbody>
+                          <tr>
+                            <th>Harga</th>
+                            <td>Rp.{{detail.price}}</td>
+                          </tr>
+                          <tr>
+                            <th>Stock</th>
+                            <td>{{detail.stock}}</td>
+                          </tr>
+                          <tr>
+                            <th>Category</th>
+                            <td>{{detail.category}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <button type="button" name="addtocart">add to bag</button>
+                    </div>
+                    <div class="modal-footer">
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <hr>
+  <div class="container-fluid foot">
+    <div class="container">
+    <div class="row">
+      <div id="footer">
+        <div class="navbar">
+          <div class="col-md-3">
+            <h4>Ready Stok</h4>
+            <p>Jumlah produk kami sesuai yang tercantum di web. Stok yang kosong
+            akan secara otomatis ditandai dengan kosong. 
+            </p>
+            <p>
+            Berlaku untuk semua produk kecuali produk dengan keterangan indent 
+            dan preorder.
+            </p>
+          </div>
+          <div class="col-md-3">
+            <h4>Gratis Ongkir</h4>
+            <p>Tersedia jasa pengiriman ojek online gratis - Khusus wilayah Jakarta.</p>
+            <p>Anda dapat menerima pesanan anda di hari yang sama, kecuali hari minggu.</p>
+          </div>
+          <div class="col-md-3">
+            <h4>Lokasi Toko</h4>
+            <address>
+              <h5>Shophonia Store</h5>
+              <br>
+              Jl. Rajawali No.115 
+              Jakarta - 12240
+              <br>
+              Telp. 021-66655577
+            </address>
+          </div>
+          <div class="col-md-3">
+            <h4>Jam Operasional</h4>
+            <p>Toko fisik kami siap melayani anda pada:</p>
+            <p>Senin s/d Sabtu. Pukul: 11.00 - 20.00 </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="container-fluid">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+
+        </div>
+      </div>
+    </div>
+  </div>
+    <script>
+    $("#thumb").mouseover(function(){
+      $(this).animate({
+          padding: "0px"
+      }, 500);
+    }).mouseout(function(){
+      $(this).animate({
+          padding: "5px"
+      }, 500);
+    });
+    
+    var app = new Vue({
+      el:'#app',
+      data: {
+        results: [],
+        detail: []
+      },
+      methods: {
+        fetchData: function() {
+          axios.get('http://localhost:3000/api/audiostuff')
+          .then ( response => {
+            this.results = response;
+          })
+        },
+        
+        fetchById(id) {
+          console.log(id);
+          axios.get(`http://localhost:3000/api/audiostuff/${id}`)
+          .then( response => {
+            this.detail = response.data;
+            console.log(response.data.category);
+          })
+        }
+      },
+      created: function() {
+        this.fetchData()
+      }
+    })
+    
+    </script>
+  </body>
+</html>
