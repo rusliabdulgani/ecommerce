@@ -19,6 +19,9 @@ var audioStuff = new schema({
 
 var customers = new schema({
   name: String,
+  email: String,
+  username: String,
+  password: String,
   address: String,
   zipcode: String,
   phone: String 
