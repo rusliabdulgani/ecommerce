@@ -80,26 +80,33 @@
                     </div>
                     <div class=" modal-body">
                       <img v-bind:src="detail.image" alt="">
+                      <div class="col-md-6">
+                        <table class="table table-condensed">
+                          <tbody>
+                            <tr>
+                              <th>Harga</th>
+                              <td>Rp.{{detail.price}}</td>
+                            </tr>
+                            <tr>
+                              <th>Stock</th>
+                              <td>{{detail.stock}}</td>
+                            </tr>
+                            <tr>
+                              <th>Category</th>
+                              <td>{{detail.category}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <div class="form-group">
+                          <label for="sel1">Jumlah</label>
+                          <select class="form-control" id="sel1" name="stock" >
+                            <option v-for="st in stock">{{st}}</option>
+                          </select>
+                        </div>
+                        <button type="button" name="addtocart">add to bag</button>
+                      </div>
                     </div>
-                    <div class="col-md-6">
-                      <table class="table table-condensed">
-                        <tbody>
-                          <tr>
-                            <th>Harga</th>
-                            <td>Rp.{{detail.price}}</td>
-                          </tr>
-                          <tr>
-                            <th>Stock</th>
-                            <td>{{detail.stock}}</td>
-                          </tr>
-                          <tr>
-                            <th>Category</th>
-                            <td>{{detail.category}}</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <button type="button" name="addtocart">add to bag</button>
-                    </div>
+                    
                     <div class="modal-footer">
                       
                     </div>
@@ -177,7 +184,8 @@
       el:'#app',
       data: {
         results: [],
-        detail: []
+        detail: [],
+        stock: []
       },
       methods: {
         fetchData: function() {
@@ -189,9 +197,14 @@
         
         fetchById(id) {
           console.log(id);
+          let dataStock = [];
           axios.get(`http://localhost:3000/api/audiostuff/${id}`)
           .then( response => {
+            for(let i = 0 ; i < response.data.stock ; i++){
+              dataStock.push(i+1)
+            }
             this.detail = response.data;
+            this.stock = dataStock
             console.log(response.data.category);
           })
         }
