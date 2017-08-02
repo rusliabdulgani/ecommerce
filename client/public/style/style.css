@@ -1,0 +1,35 @@
+body{
+  font-family: 'Slabo 27px', serif;
+  font-family: 'Zilla Slab', serif;
+}
+
+
+#footer-theme {
+  background-color: blue;
+}
+
+.container .row .col-md-3 a {
+  text-decoration: none;
+}
+.container .row .col-xs-12 a {
+  text-decoration: none;
+}
+
+.top {
+  margin-top: 20px;
+}
+
+.foot {
+  background-color: white;
+  height: 100%;
+  color: grey;
+  padding: 20px;
+}
+
+.thumbnail {
+  height: 400px;
+}
+
+.thumbnail img{
+  height: 240px;
+}
